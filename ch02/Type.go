@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"math"
 )
@@ -21,4 +22,26 @@ func main() {
 	x := 1 + 2i
 	y := 2 + 3i
 	fmt.Println(x * y)
+
+	var text string
+	text = "中国"
+	u := []rune(text)
+	fmt.Printf("%x\n", text)
+	fmt.Printf("%x\n", u)
+
+	fmt.Printf(intsToString([]int{2, 3, 5, 8, 13}))
+}
+
+func intsToString(a []int) string {
+	var buf bytes.Buffer
+	buf.WriteByte('[')
+	for i, v := range a {
+		if i > 0 {
+			buf.WriteString(", ")
+		}
+		fmt.Fprintf(&buf, "%d", v)
+	}
+	buf.WriteByte(']')
+
+	return buf.String()
 }
